@@ -1,80 +1,33 @@
 #include "SerialPort.hpp"
 
-/*Constructors*/
-SerialPort::SerialPort()
-    : isConnect(false) {}
-
 SerialPort::SerialPort(const char* port, unsigned long BaudRate)
     : isConnect(false)
 {
     Initialize(port, BaudRate);
 }
 
-/*Initialization*/
+//Bağlantı başlatma
 void SerialPort::Initialize(const char* port, unsigned long BaudRate)
 {
+    // Serial Portu aç
     handler = CreateFileA(port, GENERIC_READ | GENERIC_WRITE, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (handler == INVALID_HANDLE_VALUE)
-    {
-        std::cout << "Error during opening port" << port << std::endl;
-        return;
-    }
 
-    DCB serialParameters;
-    if (!GetCommState(handler, &serialParameters)) /*Get com parameters*/
-    {
-        std::cout << "Failed to get current serial parameters" << std::endl;
-        return;
-    }
 
-    serialParameters.DCBlength = sizeof(DCB);
+    DCB serialParameters; //Cihaz Kontrol Bloğu
+    //Seri port konfigürasyonu içeren yapı
+
+    GetCommState(handler, &serialParameters); //COM parametrelerini al
+
     serialParameters.BaudRate = BaudRate;
     serialParameters.ByteSize = 8; /*8 bit data format*/
     serialParameters.StopBits = ONESTOPBIT;
     serialParameters.Parity = NOPARITY;
 
-    if (!SetCommState(handler, &serialParameters)) /*Send modified com parameters*/
-    {
-        std::cout << "Failed to set THE Serial port parameters" << std::endl;
-        return;
-    }
-
-    isConnect = true;
-    PurgeComm(handler, PURGE_RXCLEAR | PURGE_TXCLEAR);
+    SetCommState(handler, &serialParameters); //Değiştirilmiş COM parametrelerini gönder
 }
 
 /*Serial I/O*/
 void SerialPort::receive(unsigned char &data, unsigned int byteSize)
 {
-    ReadFile(handler, &data, byteSize, NULL, NULL);
-}
-
-void SerialPort::transmit(unsigned char *data, unsigned int byteSize)
-{
-    WriteFile(handler, data, byteSize, NULL, NULL);
-}
-
-/*State*/
-void SerialPort::connect()
-{
-    isConnect = true;
-}
-
-void SerialPort::disconnect()
-{
-    isConnect = false;
-}
-bool SerialPort::isConnected()
-{
-    return isConnect;
-}
-
-/*Destructors*/
-SerialPort::~SerialPort()
-{
-    if (isConnect)
-    {
-        isConnect = false;
-        CloseHandle(handler);
-    }
+    ReadFile(handler, &data, byteSize, NULL, NULL); //Belirtilen I/O aygıtından veriyi okur
 }

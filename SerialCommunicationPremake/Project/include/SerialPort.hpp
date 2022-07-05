@@ -5,23 +5,13 @@ class SerialPort
 {
 public:
     //Constructors
-    SerialPort();
-    SerialPort(const char* port, unsigned long BaudRate);
+    SerialPort(const char* port, unsigned long BaudRate); //seri port bağlantı noktasını kuran yapıcı
 
     //Initialization
-    void Initialize(const char* port, unsigned long BaudRate);
+    void Initialize(const char* port, unsigned long BaudRate); //bağlantıyı başlat.
 
     //Serial I/O
-    void receive(unsigned char &data, unsigned int byteSize);
-    void transmit(unsigned char *data, unsigned int byteSize);
-
-    //State
-    void connect();
-    void disconnect();
-    bool isConnected();
-
-    //Destructor
-    ~SerialPort();
+    void receive(unsigned char &data, unsigned int byteSize); //veriyi alma
 
 private:
     HANDLE handler;
