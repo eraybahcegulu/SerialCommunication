@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    SerialPort port("COM3", 115200);
+    SerialPort port("COM4", 115200);
 
     while (1)
     {
