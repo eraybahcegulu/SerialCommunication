@@ -1,17 +1,74 @@
 #include <iostream>
-#include "SerialPort.hpp"
+#include "SerialPort.h"
 
 using namespace std;
 
 int main()
 {
-    SerialPort port("COM4", 115200);
-
-    while (1)
+    choice:
+    cout << "choice COM" << endl;
+    cout << "COM3 -- 3" << endl;
+    cout << "COM4 -- 4" << endl;
+    cout << "COM5 -- 5" << endl;
+    cout << "COM6 -- 6" << endl;
+    int choice;
+    cin >> choice;
+    switch (choice)
     {
-        unsigned char data;
-        port.receive(data, 1);
-        cout << data;
+    case 3:
+    {
+        SerialPort port3("COM3", 115200);
+
+        while (1)
+        {
+            unsigned char comdata3;
+            port3.receive(comdata3, 1);
+            cout << comdata3;
+        }
+        return 0;
     }
-    return 0;
+    break;
+    case 4:
+    {
+        SerialPort port4("COM4", 115200);
+
+        while (1)
+        {
+            unsigned char comdata4;
+            port4.receive(comdata4, 1);
+            cout << comdata4;
+        }
+        return 0;
+    }
+    break;
+    case 5:
+    {
+        SerialPort port5("COM5", 115200);
+
+        while (1)
+        {
+            unsigned char comdata5;
+            port5.receive(comdata5, 1);
+            cout << comdata5;
+        }
+        return 0;
+    }
+    break;
+    case 6:
+    {
+        SerialPort port6("COM6", 115200);
+
+        while (1)
+        {
+            unsigned char comdata6;
+            port6.receive(comdata6, 1);
+            cout << comdata6;
+        }
+        return 0;
+    }
+    break;
+    default:
+        cout << "3, 4, 5 veya 6 giriniz";
+        goto choice;
+    }
 }
