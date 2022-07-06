@@ -1,4 +1,4 @@
-workspace "Workspace"
+workspace "SerialCommunication"
     architecture "x64"
 
     configurations {
@@ -6,8 +6,8 @@ workspace "Workspace"
         "Release"
     }
 
-    startproject "Project"
+    startproject "SerialCommunicationModule"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-include "Project"
+include "SerialCommunication"

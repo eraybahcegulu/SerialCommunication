@@ -2,7 +2,7 @@
 #include "SerialPort.h"
 
 using namespace std;
-
+using namespace SerialModule;
 int main()
 {
     choice:
