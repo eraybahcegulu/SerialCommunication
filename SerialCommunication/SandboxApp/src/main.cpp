@@ -2,7 +2,7 @@
 #include "SerialPort.h"
 
 using namespace std;
-using namespace SerialModule;
+
 int main()
 {
     choice:
@@ -17,7 +17,7 @@ int main()
     {
     case 3:
     {
-        SerialPort port3("COM3", 115200);
+        SerialModule::SerialPort port3("COM3", 115200);
 
         while (1)
         {
@@ -30,7 +30,7 @@ int main()
     break;
     case 4:
     {
-        SerialPort port4("COM4", 115200);
+        SerialModule::SerialPort port4("COM4", 115200);
 
         while (1)
         {
@@ -43,7 +43,7 @@ int main()
     break;
     case 5:
     {
-        SerialPort port5("COM5", 115200);
+        SerialModule::SerialPort port5("COM5", 115200);
 
         while (1)
         {
@@ -56,7 +56,7 @@ int main()
     break;
     case 6:
     {
-        SerialPort port6("COM6", 115200);
+        SerialModule::SerialPort port6("COM6", 115200);
 
         while (1)
         {

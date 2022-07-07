@@ -1,14 +1,13 @@
 #include "SerialPort.h"
-using namespace SerialModule;
 
-SerialPort::SerialPort(const char* port, unsigned long BaudRate)
+SerialModule::SerialPort::SerialPort(const char* port, unsigned long BaudRate)
     : isConnect(false)
 {
     Initialize(port, BaudRate);
 }
 
 //initialize serial port connection
-void SerialPort::Initialize(const char* port, unsigned long BaudRate)
+void SerialModule::SerialPort::Initialize(const char* port, unsigned long BaudRate)
 {
     //Open Serial Port
     handler = CreateFileA(port, GENERIC_READ | GENERIC_WRITE, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -34,7 +33,7 @@ void SerialPort::Initialize(const char* port, unsigned long BaudRate)
 }
 
 /*Serial I/O*/
-void SerialPort::receive(unsigned char &data, unsigned int byteSize)
+void SerialModule::SerialPort::receive(unsigned char &data, unsigned int byteSize)
 {
     ReadFile(handler, &data, byteSize, NULL, NULL); //Reads data from specified I/O device
 }
