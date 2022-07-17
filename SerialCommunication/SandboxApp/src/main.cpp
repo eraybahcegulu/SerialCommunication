@@ -5,70 +5,53 @@ using namespace std;
 
 int main()
 {
-    choice:
-    cout << "choice COM" << endl;
-    cout << "COM3 -- 3" << endl;
-    cout << "COM4 -- 4" << endl;
-    cout << "COM5 -- 5" << endl;
-    cout << "COM6 -- 6" << endl;
-    int choice;
-    cin >> choice;
-    switch (choice)
-    {
-    case 3:
-    {
-        SerialModule::SerialPort port3("COM3", 115200);
+    SerialModule::SerialPort();
+    SerialModule::SerialPort port3("COM3", 115200);
+    SerialModule::SerialPort port4("COM4", 115200);
+    SerialModule::SerialPort port5("COM5", 115200);
+    SerialModule::SerialPort port6("COM6", 115200);
 
-        while (1)
+    if (port3.isConnected())
+    {
+        cout << endl << "COM3" << endl;
+        while (port3.isConnected())
         {
             unsigned char comdata3;
             port3.receive(comdata3, 1);
             cout << comdata3;
         }
-        return 0;
     }
-    break;
-    case 4:
-    {
-        SerialModule::SerialPort port4("COM4", 115200);
 
-        while (1)
+    if (port4.isConnected())
+    {
+        cout << endl << "COM4" << endl;
+        while (port4.isConnected())
         {
             unsigned char comdata4;
             port4.receive(comdata4, 1);
             cout << comdata4;
         }
-        return 0;
     }
-    break;
-    case 5:
-    {
-        SerialModule::SerialPort port5("COM5", 115200);
 
-        while (1)
+    if (port5.isConnected())
+    {
+        cout << endl << "COM5" << endl;
+        while (port5.isConnected())
         {
             unsigned char comdata5;
             port5.receive(comdata5, 1);
             cout << comdata5;
         }
-        return 0;
     }
-    break;
-    case 6:
-    {
-        SerialModule::SerialPort port6("COM6", 115200);
 
-        while (1)
+    if (port6.isConnected())
+    {
+        cout << endl << "COM6" << endl;
+        while (port6.isConnected())
         {
             unsigned char comdata6;
             port6.receive(comdata6, 1);
             cout << comdata6;
         }
-        return 0;
-    }
-    break;
-    default:
-        cout << "3, 4, 5 veya 6 giriniz";
-        goto choice;
     }
 }
