@@ -5,7 +5,6 @@ using namespace std;
 
 int main()
 {
-    SerialModule::SerialPort();
     SerialModule::SerialPort port3("COM3", 115200);
     SerialModule::SerialPort port4("COM4", 115200);
     SerialModule::SerialPort port5("COM5", 115200);
