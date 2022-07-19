@@ -1,15 +1,17 @@
 project "SerialCommunicationModule"
     kind "StaticLib"
 
-    targetdir("../bin" .. outputdir .. "/%{prj.name}")
-    objdir("../bin-int" .. outputdir .. "/%{prj.name}")
+    targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+    objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
     
-    includedirs{
+    includedirs
+    {
         "include"
     }
 
-    files {
+    files 
+    {
         "src/SerialPort.cpp",
         "include/SerialPort.h"
     }

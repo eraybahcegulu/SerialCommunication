@@ -6,26 +6,16 @@ namespace SerialModule
 {
     class SerialPort
     {
-        public:
-        //Constructors
+    public:
         SerialPort();
-        SerialPort(const char* port, unsigned long BaudRate); //the constructor that set up the serial port
-
-        //Initialization
-        void Initialize(const char* port, unsigned long BaudRate); //initialize serial port connection
-
-        //Serial I/O
-        void receive(unsigned char& data, unsigned int byteSize); //receives serial port data
-
-        //Destructor
+        SerialPort(const char* port, unsigned long BaudRate);
         ~SerialPort();
-
-        bool isConnected(); //Check if we are actually connected
-
-        private:
-        HANDLE handler;
-        bool isConnect;
-
-};
+        void Initialize(const char* port, unsigned long BaudRate);
+        void ReceiveData(unsigned char& data, unsigned int byteSize);
+        bool IsConnected() const; 
+    private:
+        HANDLE m_handler;
+        bool m_isConnect;
+    };
 
 }

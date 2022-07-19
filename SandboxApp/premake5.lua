@@ -2,15 +2,17 @@ project "Sandbox"
     kind "ConsoleApp"
     language "C++"
 
-    targetdir("../bin" .. outputdir .. "/%{prj.name}")
-    objdir("../bin-int" .. outputdir .. "/%{prj.name}")
+    targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+    objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files {
+    files 
+    {
         "src/main.cpp"
     }
 
-    includedirs{
-        "../SerialCommunication/include"
+    includedirs
+    {
+        "%{wks.location}/SerialCommunication/include"
     }
 
     links { "SerialCommunicationModule" }
