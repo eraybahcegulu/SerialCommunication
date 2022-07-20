@@ -7,11 +7,13 @@ project "SerialCommunicationModule"
     
     includedirs
     {
-        "include"
+        "include",
+        "vendor/spdlog/include"
     }
 
     files 
     {
         "src/SerialPort.cpp",
-        "include/SerialPort.h"
+        "include/SerialPort.h",
+        "vendor/spdlog/include/spdlog/**.h"
     }

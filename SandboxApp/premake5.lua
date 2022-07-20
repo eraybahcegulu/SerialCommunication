@@ -12,7 +12,11 @@ project "Sandbox"
 
     includedirs
     {
-        "%{wks.location}/SerialCommunication/include"
+        "%{wks.location}/SerialCommunication/include",
+        "%{wks.location}/SerialCommunication/vendor/spdlog/include"
     }
 
-    links { "SerialCommunicationModule" }
+    links 
+    {
+         "SerialCommunicationModule"
+    }
