@@ -1,0 +1,3 @@
+[submodule "SerialCommunication/vendor/spdlog"]
+	path = SerialCommunication/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git
