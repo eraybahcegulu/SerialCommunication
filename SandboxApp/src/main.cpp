@@ -43,7 +43,4 @@ int main()
         cout << comdata3;
         }
     }
-
-
-
 }

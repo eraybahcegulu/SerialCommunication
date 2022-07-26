@@ -48,7 +48,7 @@ namespace SerialModule
 
         else
         {
-            std::cout << port << " is active" << std::endl;
+            std::cout << std::endl << port << " is active" << std::endl;
             //If connected we try to set the comm parameters
             DCB serialParameters; //Device Control Block
 
@@ -114,11 +114,11 @@ namespace SerialModule
         if (!WriteFile(this->m_handler, (void*)buffer, 1, &bytesSend, 0)) {
             
             ClearCommError(this->m_handler, &this->errors, &this->status);
-            std::cerr << "Error write" << std::endl;
-            
+            td::cout << "Data was not written" << std::endl;
             return false;
         }
         else
+            std::cout << "Data written successfully" << std::endl;
             return true;
     }
 
