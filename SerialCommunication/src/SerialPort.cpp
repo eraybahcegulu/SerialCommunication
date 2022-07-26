@@ -83,6 +83,27 @@ namespace SerialModule
         }
     }
 
+    std::vector<int> SerialPort::GetAvailablePorts()
+    {
+        char lpTargetPath[5000]; // buffer to store the path of the COM PORTS
+        std::vector<int> portList;
+        std::cout << "Active Ports" << std::endl;
+        for (int i = 0; i < 255; i++) // checking ports from COM0 to COM255
+        {
+            std::string str = "COM" + std::to_string(i); // COM0 .. COM255
+            DWORD name = QueryDosDeviceA(str.c_str(), lpTargetPath, 5000);
+
+            
+            if (name != 0) //QueryDosDevice returns zero if it didn't find an object
+            {
+                portList.push_back(i);
+                std::cout << str << ": " << lpTargetPath << std::endl;
+            }
+
+        }
+        return portList;
+    }
+
     void SerialPort::ReceiveData(unsigned char& data, unsigned int byteSize)
     {
         ReadFile(m_handler, &data, byteSize, NULL, NULL); //Reads data from specified I/O device   
