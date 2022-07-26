@@ -114,7 +114,7 @@ namespace SerialModule
         if (!WriteFile(this->m_handler, (void*)buffer, 1, &bytesSend, 0)) {
             
             ClearCommError(this->m_handler, &this->errors, &this->status);
-            td::cout << "Data was not written" << std::endl;
+            std::cout << "Data was not written" << std::endl;
             return false;
         }
         else
