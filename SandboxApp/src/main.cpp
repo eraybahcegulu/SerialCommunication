@@ -5,6 +5,11 @@
 
 using namespace std;
 
+SerialModule::SerialPort serial;
+std::vector<int> comPorts = serial.GetAvailablePorts();
+
+SerialModule::SerialPort port3("COM3", 115200);
+
 int main()
 {
 	/*
@@ -27,7 +32,17 @@ int main()
 	5. Add function that closes open port
 	*/
 
+	std::string data = "Hello from computer";
+    port3.WriteData(data.c_str());
 
+    if (port3.IsConnected()) {
+        while (port3.IsConnected())
+        {
+        unsigned char comdata3;
+        port3.ReceiveData(comdata3, 1);
+        cout << comdata3;
+        }
+    }
 
 
 
