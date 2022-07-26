@@ -88,6 +88,30 @@ namespace SerialModule
         ReadFile(m_handler, &data, byteSize, NULL, NULL); //Reads data from specified I/O device   
     }
 
+    bool SerialPort::WriteData(const char* buffer) {
+        DWORD bytesSend;
+        if (!WriteFile(this->m_handler, (void*)buffer, 1, &bytesSend, 0)) {
+            
+            ClearCommError(this->m_handler, &this->errors, &this->status);
+            std::cerr << "Error write" << std::endl;
+            
+            return false;
+        }
+        else
+            return true;
+    }
+
+    bool SerialPort::CloseSerialPort()
+    {
+        if (m_isConnect) {
+            m_isConnect = false;
+            CloseHandle(m_handler);
+            return true;
+        }
+        else
+            return false;
+    }
+
     bool SerialPort::IsConnected() const
     {
         return m_isConnect;
