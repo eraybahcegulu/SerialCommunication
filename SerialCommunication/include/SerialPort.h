@@ -12,7 +12,9 @@ namespace SerialModule
         ~SerialPort();
         void Initialize(const char* port, unsigned long BaudRate);
         void ReceiveData(unsigned char& data, unsigned int byteSize);
-        bool IsConnected() const; 
+        bool IsConnected() const;
+        bool WriteData(const char* buffer);
+        bool CloseSerialPort();
     private:
         HANDLE m_handler;
         bool m_isConnect;
