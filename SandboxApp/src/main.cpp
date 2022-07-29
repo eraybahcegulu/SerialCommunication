@@ -5,10 +5,11 @@
 
 using namespace std;
 
-SerialModule::SerialPort serial;
-std::vector<int> comPorts = serial.GetAvailablePorts();
+#define MAX_BUFFER_SIZE 255
+uint8_t incoming_data[MAX_BUFFER_SIZE];
 
-SerialModule::SerialPort port3("COM3", 115200);
+const char* com = "COM3";
+const long BaudRate = 9600;
 
 int main()
 {
@@ -32,15 +33,28 @@ int main()
 	5. Add function that closes open port
 	*/
 
-	std::string data = "Hello from computer";
-    port3.WriteData(data.c_str());
+	SerialModule::SerialPort Logs;
+    SerialModule::SerialPort Ports;
 
-    if (port3.IsConnected()) {
-        while (port3.IsConnected())
-        {
-        unsigned char comdata3;
-        port3.ReceiveData(comdata3, 1);
-        cout << comdata3;
-        }
+    Logs.initSpdLog();
+    Ports.GetAvailablePorts();
+    SerialModule::SerialPort port(com, BaudRate);
+
+    
+
+    std::string data = "Hello from computer";
+    port.WriteData(data.c_str());
+
+    if (port.IsConnected())
+    {
+        port.ReceiveData(incoming_data, MAX_BUFFER_SIZE);
+        spdlog::info("Received data from {}: {}", com , incoming_data);
+    }
+
+    port.CloseSerialPort(com);
+
+    if (port.IsConnected())
+    {
+        spdlog::warn("{} still open", com);
     }
 }

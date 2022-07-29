@@ -2,29 +2,31 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/sinks/rotating_file_sink.h"
+#include "spdlog/async.h"
 namespace SerialModule
 {
     class SerialPort
     {
     public:
+        void initSpdLog();
         SerialPort();
         ~SerialPort();
-
         SerialPort(const char* port, unsigned long BaudRate);
-
-        std::vector<int> GetAvailablePorts();
-        
+        std::vector<int> GetAvailablePorts();  
         void Initialize(const char* port, unsigned long BaudRate);
-        void ReceiveData(unsigned char& data, unsigned int byteSize);
-        bool IsConnected() const;
+        bool ReceiveData(uint8_t* buffer, uint8_t buffer_size);
         bool WriteData(const char* buffer);
-        bool CloseSerialPort();
+        bool IsConnected() const;
+        bool CloseSerialPort(const char* port);
     private:
         HANDLE m_handler;
         bool m_isConnect;
         COMSTAT status;
         DWORD errors;
+        
     };
 
 }
