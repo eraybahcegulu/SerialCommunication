@@ -11,7 +11,7 @@ namespace SerialModule
     class SerialPort
     {
     public:
-        void initSpdLog();
+        void InitSpdLog();
         SerialPort();
         ~SerialPort();
         SerialPort(const char* port, unsigned long BaudRate);

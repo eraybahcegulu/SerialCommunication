@@ -36,7 +36,7 @@ int main()
 	SerialModule::SerialPort Logs;
     SerialModule::SerialPort Ports;
 
-    Logs.initSpdLog();
+    Logs.InitSpdLog();
     Ports.GetAvailablePorts();
     SerialModule::SerialPort port(com, BaudRate);
 
