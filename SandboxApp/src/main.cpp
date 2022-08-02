@@ -32,29 +32,30 @@ int main()
 
 	5. Add function that closes open port
 	*/
-
+	
 	SerialModule::SerialPort Logs;
-    SerialModule::SerialPort Ports;
+	SerialModule::SerialPort Ports;
 
-    Logs.InitSpdLog();
-    Ports.GetAvailablePorts();
-    SerialModule::SerialPort port(com, BaudRate);
+	Logs.InitSpdLog();
+	Ports.GetAvailablePorts();
+	SerialModule::SerialPort port(com, BaudRate);
 
     
 
-    std::string data = "Hello from computer";
-    port.WriteData(data.c_str());
+	std::string data = "Hello from computer";
+	port.WriteData(data.c_str());
 
-    if (port.IsConnected())
-    {
-        port.ReceiveData(incoming_data, MAX_BUFFER_SIZE);
-        spdlog::info("Received data from {}: {}", com , incoming_data);
-    }
+	if (port.IsConnected())
+	{
+		port.ReceiveData(incoming_data, MAX_BUFFER_SIZE);
+		spdlog::info("Received data from {}: {}", com , incoming_data);
+	}
 
-    port.CloseSerialPort(com);
+	port.CloseSerialPort(com);
 
-    if (port.IsConnected())
-    {
-        spdlog::warn("{} still open", com);
-    }
+	if (port.IsConnected())
+	{
+		spdlog::warn("{} still open", com);
+	}
+
 }

@@ -2,8 +2,6 @@
 
 namespace SerialModule
 {
-    
-
     SerialPort::SerialPort()
         : m_isConnect(false) 
     {
@@ -27,12 +25,12 @@ namespace SerialModule
             CloseHandle(m_handler);
         }
     }
-
+	
     bool SerialPort::IsConnected() const
     {
         return m_isConnect;
     }
-    
+	
     void SerialPort::Initialize(const char* port, unsigned long baudRate)
     {
         //Open Serial Port
@@ -41,11 +39,11 @@ namespace SerialModule
         if (m_handler == INVALID_HANDLE_VALUE)
         {
             //If not success full display an Error
-            if (GetLastError() == ERROR_FILE_NOT_FOUND) {
+            if (GetLastError() == ERROR_FILE_NOT_FOUND) 
+			{
 
                 //Print Error if neccessary
-                spdlog::warn("{} is not active\n", port);
-
+                spdlog::warn("{} is not active\n", port)
             }
             else
             {
@@ -55,7 +53,9 @@ namespace SerialModule
 
         else
         {
+
             spdlog::info("{} starting connection\n", port);
+
             //If connected we try to set the comm parameters
             DCB serialParameters; //Device Control Block
 
@@ -74,6 +74,7 @@ namespace SerialModule
                 serialParameters.Parity = NOPARITY;
                 serialParameters.fDtrControl = DTR_CONTROL_ENABLE;
                 //Set the parameters and check for their proper application
+				
                 if (!SetCommState(m_handler, &serialParameters))
                 {
                     spdlog::error("Could not set Serial Port parameters\n");
@@ -110,8 +111,6 @@ namespace SerialModule
         }
         return portList;
     }
-
-   
 
     bool SerialPort::ReceiveData(uint8_t* buffer, uint8_t buffer_size) {
         DWORD bytesRead = 0;
@@ -170,6 +169,4 @@ namespace SerialModule
         else
             return false;
     }
-
-   
 }
