@@ -28,21 +28,21 @@ Library for communicating with COM ports on a Windows system.
 	$ premake5 vs2019
 	```
 
-## Examples
+## Example
 
-    ```c++
-	#include <iostream>
-    #include <vector>
+```c++
+#include <iostream>
+#include <vector>
 
-    #include "SerialPort.h"
+#include "SerialPort.h"
 
-    using namespace std;
+using namespace std;
 
-    #define MAX_BUFFER_SIZE 255
-    uint8_t incoming_data[MAX_BUFFER_SIZE];
+#define MAX_BUFFER_SIZE 255
+uint8_t incoming_data[MAX_BUFFER_SIZE];
 
-    const char* com = "COM3";
-    const long BaudRate = 9600;
+const char* com = "COM3";
+const long BaudRate = 9600;
 
     int main()
     {	
@@ -72,4 +72,4 @@ Library for communicating with COM ports on a Windows system.
 	}
 
     }
-	```
+```
