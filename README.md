@@ -45,7 +45,7 @@ Library for communicating with COM ports on a Windows system.
     const long BaudRate = 9600;
 
     int main()
-{	
+    {	
 	SerialModule::SerialPort Logs;
 	SerialModule::SerialPort Ports;
 
@@ -71,5 +71,5 @@ Library for communicating with COM ports on a Windows system.
 		spdlog::warn("{} still open", com);
 	}
 
-}
+    }
 	```
