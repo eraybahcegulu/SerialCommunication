@@ -27,3 +27,8 @@ Library for communicating with COM ports on a Windows system.
     ```
 	$ premake5 vs2019
 	```
+1. You can see a complete list of the actions and other options supported by a project with the command
+
+    ```
+	$ premake5 --help
+	```
