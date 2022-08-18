@@ -20,11 +20,27 @@
 #include <windows.h>
 #endif
 
+#ifdef LINUX
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <termios.h>
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+#define BUFFER_SIZE 256
+#define TIME_OUT 20
+#endif
+
 namespace SerialModule
 {
     class SerialPort
     {
     public:
+
+    #ifdef WINDOWS
         void InitSpdLog();
         SerialPort();
         ~SerialPort();
@@ -35,6 +51,16 @@ namespace SerialModule
         bool WriteData(const char* buffer);
         bool IsConnected() const;
         bool CloseSerialPort(const char* port);
+    #endif
+
+    #ifdef LINUX
+        void InitSpdLog();
+        char OpenPortLinux(char* port, int baud, char bits, parity parity, char stopbit);
+        void ClosePortLinux(void);
+        char WriteData(char* buffer, int length);
+        int ReadData(char* buffer);
+    #endif
+
     private:
 
     #ifdef WINDOWS
@@ -43,6 +69,13 @@ namespace SerialModule
         COMSTAT status;
         DWORD errors;
     #endif
+
+    #ifdef LINUX
+        int	m_fd;
+        struct termios m_oldtio;
+        struct termios m_newtio;
+    #endif
+
     };
 
 }
