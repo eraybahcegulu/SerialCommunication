@@ -8,13 +8,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/rotating_file_sink.h"
 #include "spdlog/async.h"
-
-#if defined (_WIN32) || defined (_WIN64)
-#define WINDOWS 
-
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined (__linux__)
-#define LINUX
-#endif
+#include "Core.h"
 
 #ifdef WINDOWS
 #include <windows.h>
