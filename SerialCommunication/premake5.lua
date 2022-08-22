@@ -15,5 +15,6 @@ project "SerialCommunicationModule"
     {
         "src/SerialPort.cpp",
         "include/SerialPort.h",
+        "include/Core.h",
         "vendor/spdlog/include/spdlog/**.h"
     }
