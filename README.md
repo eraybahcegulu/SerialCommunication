@@ -25,7 +25,7 @@ Library for communicating with COM ports on a Windows system.
 1. Generate project files by running a command like this one
 
     ```
-	$ premake5 vs2019
+	$ premake5 vs2022
 	```
 1. You can see a complete list of the actions and other options supported by a project with the command
 

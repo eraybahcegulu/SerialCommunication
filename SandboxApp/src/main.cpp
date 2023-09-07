@@ -1,4 +1,5 @@
 #include "SerialPort.h"
+#include "spdlog/spdlog.h"
 
 using namespace std;
 
@@ -6,73 +7,52 @@ using namespace std;
 uint8_t incoming_data[MAX_BUFFER_SIZE];
 
 #ifdef WINDOWS
-const char* com = "COM5";
-const long BaudRate = 115200;
-#endif
-
-#ifdef LINUX
-char* port = "/dev/ttyUSB0";
-int BaudRate = 9600;
-char Bits = 8;
-char StopBit = 1;
+const long BaudRate = 9600;
 #endif
 
 int main()
 {
-    SerialModule::SerialPort Logs;
-    Logs.InitSpdLog();
-
 #ifdef WINDOWS
     SerialModule::SerialPort Ports;
     Ports.GetAvailablePorts();
 
-    SerialModule::SerialPort port;
-    port.Initialize(com, BaudRate);
+    SerialModule::SerialPort Logs;
+    Logs.InitSpdLog();
 
-    std::string data = "Hello from computer";
+    string data;
+    string com;
+    int baudRate;
+
+    spdlog::info("Enter Active COM Port (COM1, COM2...): ");
+    cin >> com;
+
+    spdlog::info("Enter Baud Rate (9600, 115200...): ");
+    cin >> baudRate;
+
+    spdlog::info("COM Port entered by the user: {}", com);
+    spdlog::info("Baud Rate entered by the user: {}", baudRate);
+
+    SerialModule::SerialPort port;
+    port.Initialize(com.c_str(), BaudRate);
+
+    spdlog::info("Enter the data to be sent: ");
+    cin >> data;
     port.WriteData(data.c_str());
+
+    spdlog::info("Sent data to {}: {}", com, data);
 
     if (port.IsConnected())
     {
         port.ReceiveData(incoming_data, MAX_BUFFER_SIZE);
-        spdlog::info("Received data from {}: {}", com , incoming_data);
+        spdlog::info("Received data from {}: {}", com, incoming_data);
     }
 
-    port.CloseSerialPort(com);
+    port.CloseSerialPort(com.c_str());
 
     if (port.IsConnected())
     {
         spdlog::warn("{} still open", com);
     }
 #endif
-
-#ifdef LINUX
-    char buffer[256] = { 0 };
-    int i, length = 0;
-    SerialModule::SerialPort port;
-    port.OpenPortLinux(port, BaudRate, Bits, NO, StopBit);
-    while (1)
-    {
-        // Wait character
-        length = port.ReadData(buffer);
-
-        if (length)
-        {
-            for (i = 0; i < length; i++)
-            {
-                printf("%.2X ", buffer[i]);
-                //printf("%c", buffer[i]);
-            }
-
-            printf("\n");
-
-            // Send data
-            port.WriteData(buffer, length);
-        }
-    }
-    port.ClosePortLinux();
-
     return 0;
-
-#endif
 }
