@@ -1,5 +1,5 @@
 # CppSerialCommunication
-![Screenshot_1](https://github.com/eraybahcegulu/SerialCommunication/assets/84785201/40fb057a-6ba6-4b92-bef2-6a7f573d0164)
+![Screenshot_1](https://github.com/eraybahcegulu/SerialCommunication/assets/84785201/8f0e1b5e-099d-44bd-9599-a025dc6d3329)
 
 ![Screenshot_3](https://github.com/eraybahcegulu/SerialCommunication/assets/84785201/93d420f3-b92b-4fb6-a9b9-8a989c2cd40f)
 
